@@ -19,6 +19,32 @@ defmodule FishPhxWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/rooms", FishPhxWeb do
+    pipe_through :api
+
+    get "/", RoomController, :index
+    get "/:id", RoomController, :show
+    post "/", RoomController, :create
+    delete "/:name", RoomController, :delete
+  end
+
+  scope "/teams", FishPhxWeb do
+    pipe_through :api
+
+    get "/", TeamController, :index
+    get "/:id", TeamController, :show
+    get "/:id/players", PlayerController, :team
+    put "/:id", TeamController, :update
+  end
+
+  scope "/players", FishPhxWeb do
+    pipe_through :api
+
+    get "/", PlayerController, :index
+    get "/:id", PlayerController, :show
+    post "/", PlayerController, :create
+    put "/", PlayerController, :update
+  end
   # Other scopes may use custom stacks.
   # scope "/api", FishPhxWeb do
   #   pipe_through :api
