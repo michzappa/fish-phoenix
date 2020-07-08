@@ -104,10 +104,10 @@ class MakeClaim extends React.Component<MakeClaimProps, MakeClaimState> {
         this.props.teammates[2].id,
         this.state.teammate3Cards
       );
-      console.log(claimSubmission);
+      //console.log(claimSubmission);
 
       const playerCardMap = Object.fromEntries(claimSubmission);
-      console.log(playerCardMap);
+      //console.log(playerCardMap);
 
       axios
         .put(`/teams/${this.props.teamID}`, {

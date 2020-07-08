@@ -77,12 +77,12 @@ class AskForCard extends React.Component<AskForCardProps, AskForCardState> {
 
   // uses the state to ask the player for the desired card
   askForCard() {
-    console.log({
-      asking_id: this.props.playerID,
-      asked_id: this.state.opponentAsked,
-      card: this.state.desiredCard,
-      room_id: this.props.roomID,
-    });
+    // console.log({
+    //   asking_id: this.props.playerID,
+    //   asked_id: this.state.opponentAsked,
+    //   card: this.state.desiredCard,
+    //   room_id: this.props.roomID,
+    // });
     if (this.props.playerName == this.props.currentTurn) {
       axios
         .put("/players", {

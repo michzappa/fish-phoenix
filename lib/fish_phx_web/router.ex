@@ -45,6 +45,7 @@ defmodule FishPhxWeb.Router do
     post "/", PlayerController, :create
     put "/", PlayerController, :update
   end
+
   # Other scopes may use custom stacks.
   # scope "/api", FishPhxWeb do
   #   pipe_through :api
