@@ -1,4 +1,4 @@
-defmodule FishPhx.TeamController do
+defmodule FishPhxWeb.TeamController do
   use FishPhxWeb, :controller
   alias FishPhx.Teams
 
