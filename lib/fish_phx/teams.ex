@@ -81,7 +81,7 @@ defmodule FishPhx.Teams do
 
     Rooms.update_move(
       room_id,
-      "The claim[#{Enum.join(cards, ", ")}] was given to team #{Enum.join(team_players, ", ")}"
+      "The claim [#{Enum.join(cards, ", ")}] was given to team #{Enum.join(team_players, ", ")}"
     )
 
     Team.changeset(team, %{
