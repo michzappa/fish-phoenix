@@ -8,6 +8,7 @@ interface AskForCardProps {
   currentTurn?: string;
   playerID?: number;
   playerName?: string;
+  cardsCanBeAskedFor: string[];
   opponents: Player[];
 }
 interface AskForCardState {
@@ -22,6 +23,13 @@ class AskForCard extends React.Component<AskForCardProps, AskForCardState> {
     this.state = { desiredCard: "" };
 
     this.askForCard = this.askForCard.bind(this);
+    this.generateCardOptions = this.generateCardOptions.bind(this);
+  }
+
+  generateCardOptions() {
+    return this.props.cardsCanBeAskedFor.map((card) => {
+      return <option value={card}>{card}</option>;
+    });
   }
 
   render() {
@@ -50,13 +58,13 @@ class AskForCard extends React.Component<AskForCardProps, AskForCardState> {
               {this.props.opponents[2] ? this.props.opponents[2].name : ""}
             </option>
           </select>
-          <input
-            placeholder="Card"
-            type="text"
-            id="card"
-            value={this.state.desiredCard}
+          <select
+            id="choose card"
             onChange={this.updatedesiredCardState.bind(this)}
-          />
+          >
+            <option value="choose card">Choose Card</option>
+            {this.generateCardOptions()}
+          </select>
           <Button variant="primary" size="lg" onClick={this.askForCard}>
             Ask for Card
           </Button>
@@ -71,8 +79,8 @@ class AskForCard extends React.Component<AskForCardProps, AskForCardState> {
   }
 
   // sets the desired card state
-  updatedesiredCardState(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({ desiredCard: event.target.value.toUpperCase() });
+  updatedesiredCardState(event: React.ChangeEvent<HTMLSelectElement>) {
+    this.setState({ desiredCard: event.target.value });
   }
 
   // uses the state to ask the player for the desired card
@@ -100,9 +108,9 @@ class AskForCard extends React.Component<AskForCardProps, AskForCardState> {
       alert("It is not your turn");
     }
     //@ts-ignore
-    document.getElementById("card")!.value = "";
-    //@ts-ignore
     document.getElementById("choose opponent")!.value = "choose opponent";
+    //@ts-ignore
+    document.getElementById("choose card")!.value = "choose card";
     this.setState({ desiredCard: "" });
   }
 }

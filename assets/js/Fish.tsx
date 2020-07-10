@@ -21,6 +21,8 @@ interface FishState {
   team_id?: number;
   room?: Room;
 
+  cardsCanBeAskedFor: string[];
+
   team?: Team;
   teammates?: Player[];
   opponentTeam?: Team;
@@ -32,7 +34,7 @@ class Fish extends React.Component<FishProps, FishState> {
   constructor(props: FishProps) {
     super(props);
 
-    this.state = { roomNames: [], hand: [] };
+    this.state = { roomNames: [], hand: [], cardsCanBeAskedFor: [] };
     this.setPlayerState = this.setPlayerState.bind(this);
     this.getAllRooms = this.getAllRooms.bind(this);
     this.updateHand = this.updateHand.bind(this);
@@ -74,8 +76,13 @@ class Fish extends React.Component<FishProps, FishState> {
       axios.get(`/players/${this.state.player_id}`).then((res) => {
         this.setState({ hand: res.data.hand });
       });
+
+      axios.get(`/players/${this.state.player_id}/can_ask_for`).then((res) => {
+        this.setState({ cardsCanBeAskedFor: res.data.can_ask_for });
+      });
     }
   }
+
   // updates state with information related to the team of the app
   getTeam() {
     if (this.state.team_id) {
@@ -169,6 +176,7 @@ class Fish extends React.Component<FishProps, FishState> {
             playerID={this.state.player_id}
             playerName={this.state.player_name}
             opponents={this.state.opponents ? this.state.opponents : []}
+            cardsCanBeAskedFor={this.state.cardsCanBeAskedFor}
           />
           <MakeClaim
             teamID={this.state.team_id}
