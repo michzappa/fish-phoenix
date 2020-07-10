@@ -56,7 +56,7 @@ defmodule FishPhxWeb.PlayerController do
         "card" => card,
         "room_id" => room_id
       }) do
-    case Players.ask_for_card(asking_id, asked_id, card, room_id) do
+    case Players.check_if_asked_player_has_any_cards(asking_id, asked_id, card, room_id) do
       {:error, reason} -> json(conn, %{error: reason})
       {:ok, room} -> json(conn, RoomController.make_room_map_from_changeset(room))
     end

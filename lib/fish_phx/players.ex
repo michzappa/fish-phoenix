@@ -20,7 +20,12 @@ defmodule FishPhx.Players do
 
     {:ok, player} =
       %Player{}
-      |> Player.changeset(%{name: name, hand: Cards.sort_cards(hand), team_id: team_id, room_id: room_id})
+      |> Player.changeset(%{
+        name: name,
+        hand: Cards.sort_cards(hand),
+        team_id: team_id,
+        room_id: room_id
+      })
       |> Repo.insert()
 
     Rooms.update_move_and_turn(room_id, "No moves have occurred", player.name)
@@ -43,6 +48,15 @@ defmodule FishPhx.Players do
         select: player.id
 
     Repo.all(query)
+  end
+
+  def check_if_asked_player_has_any_cards(asking_id, asked_id, card, room_id) do
+    asked_player = get_player!(asked_id)
+
+    cond do
+      Kernel.length(asked_player.hand) == 0 -> {:error, "Asked player has no cards"}
+      true -> ask_for_card(asking_id, asked_id, card, room_id)
+    end
   end
 
   # checks if the asking player can ask for the specified card before proceding with the action of doing so

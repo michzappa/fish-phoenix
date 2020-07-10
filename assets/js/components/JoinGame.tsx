@@ -30,8 +30,12 @@ export default class JoinGame extends React.Component<
   }
 
   generateRoomOptions(): JSX.Element[] {
-    return this.props.roomNames.map((name) => {
-      return <option value={name}>{name}</option>;
+    return this.props.roomNames.map((name, index) => {
+      return (
+        <option id={String(index)} value={name}>
+          {name}
+        </option>
+      );
     });
   }
 
@@ -68,7 +72,9 @@ export default class JoinGame extends React.Component<
               id="choose room"
               onChange={this.updateJoiningRoomState.bind(this)}
             >
-              <option value="choose room">Choose Room</option>
+              <option id="choose room option" value="choose room">
+                Choose Room
+              </option>
               {this.generateRoomOptions()}
             </select>
             <input
@@ -83,7 +89,6 @@ export default class JoinGame extends React.Component<
             </Button>
           </form>
         </div>
-        <div></div>
       </div>
     );
   }

@@ -24,3 +24,10 @@
 .game-stat {
   padding: 20px;
 }
+
+.claim-dropdowns {
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+}
