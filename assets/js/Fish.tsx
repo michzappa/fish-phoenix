@@ -123,8 +123,10 @@ class Fish extends React.Component<FishProps, FishState> {
     if (this.state.player_id == undefined) {
       return (
         <div className="game-information">
-          <RoomList roomNames={this.state.roomNames} />
-          <JoinGame setPlayerState={this.setPlayerState} />
+          <JoinGame
+            roomNames={this.state.roomNames}
+            setPlayerState={this.setPlayerState}
+          />
         </div>
       );
     }

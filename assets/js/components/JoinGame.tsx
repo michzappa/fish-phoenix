@@ -4,6 +4,7 @@ import axios from "../axios";
 
 interface JoinGameProps {
   setPlayerState: Function;
+  roomNames: string[];
 }
 
 interface JoinGameState {
@@ -28,6 +29,12 @@ export default class JoinGame extends React.Component<
     this.joinRoomClick = this.joinRoomClick.bind(this);
   }
 
+  generateRoomOptions() {
+    return this.props.roomNames.map((name) => {
+      return <option value={name}>{name}</option>;
+    });
+  }
+
   render() {
     return (
       <div>
@@ -50,13 +57,20 @@ export default class JoinGame extends React.Component<
         </div>
         <div>
           <form>
-            <input
+            {/* <input
               placeholder="Room Name"
               type="text"
               name="Room name"
               value={this.state.roomToBeJoined}
               onChange={this.updateJoiningRoomState.bind(this)}
-            />
+            /> */}
+            <select
+              id="choose room"
+              onChange={this.updateJoiningRoomState.bind(this)}
+            >
+              <option value="choose room">Choose Room</option>
+              {this.generateRoomOptions()}
+            </select>
             <input
               placeholder="Player Name"
               type="text"
@@ -78,7 +92,7 @@ export default class JoinGame extends React.Component<
     this.setState({ roomToBeMade: event.target.value });
   }
 
-  updateJoiningRoomState(event: React.ChangeEvent<HTMLInputElement>) {
+  updateJoiningRoomState(event: React.ChangeEvent<HTMLSelectElement>) {
     this.setState({ roomToBeJoined: event.target.value });
   }
 
