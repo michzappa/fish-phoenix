@@ -6,7 +6,7 @@ axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
  */
 
 export default axios.create({
-  baseURL: "http://localhost:4000/",
-  //baseURL: "https://glistening-stale-arcticfox.gigalixirapp.com/",
+  //baseURL: "http://localhost:4000/",
+  baseURL: "https://glistening-stale-arcticfox.gigalixirapp.com/",
   responseType: "json",
 });
