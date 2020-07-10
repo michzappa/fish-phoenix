@@ -3,6 +3,7 @@ defmodule FishPhxWeb.PlayerController do
 
   alias FishPhx.Players
   alias FishPhx.Rooms
+  alias FishPhx.Cards
   alias FishPhxWeb.RoomController
 
   defp make_player_map_from_changeset(player) do
@@ -25,6 +26,12 @@ defmodule FishPhxWeb.PlayerController do
     player = Players.get_player!(id)
     player = make_player_map_from_changeset(player)
     json(conn, player)
+  end
+
+  def can_ask_for(conn, %{"id" => id}) do
+    player = Players.get_player!(id)
+    cards_can_ask_for = Cards.player_can_ask_for_cards(player.hand)
+    json(conn, %{can_ask_for: cards_can_ask_for})
   end
 
   def team(conn, %{"id" => id}) do

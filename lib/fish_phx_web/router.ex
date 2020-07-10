@@ -42,6 +42,7 @@ defmodule FishPhxWeb.Router do
 
     get "/", PlayerController, :index
     get "/:id", PlayerController, :show
+    get "/:id/can_ask_for", PlayerController, :can_ask_for
     post "/", PlayerController, :create
     put "/", PlayerController, :update
   end

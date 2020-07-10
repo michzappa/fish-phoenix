@@ -70,19 +70,11 @@ class ShowHand extends React.Component<ShowHandProps, ShowHandState> {
     ["R-J", 54],
   ]);
 
-  sortHand(hand: string[]) {
-    hand.sort(
-      (cardOne, cardTwo) =>
-        this.cardSortMap.get(cardOne)! - this.cardSortMap.get(cardTwo)!
-    );
-    return hand;
-  }
-
   render() {
     return (
       <div>
         <h1>{this.props.playerName}'s Hand</h1>
-        <p className="App-intro">{this.sortHand(this.props.hand).join(", ")}</p>
+        <p className="App-intro">{this.props.hand.join(", ")}</p>
       </div>
     );
   }

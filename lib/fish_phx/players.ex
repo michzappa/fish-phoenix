@@ -20,7 +20,7 @@ defmodule FishPhx.Players do
 
     {:ok, player} =
       %Player{}
-      |> Player.changeset(%{name: name, hand: hand, team_id: team_id, room_id: room_id})
+      |> Player.changeset(%{name: name, hand: Cards.sort_cards(hand), team_id: team_id, room_id: room_id})
       |> Repo.insert()
 
     Rooms.update_move_and_turn(room_id, "No moves have occurred", player.name)
@@ -96,7 +96,7 @@ defmodule FishPhx.Players do
 
     Player.changeset(player, %{
       name: player.name,
-      hand: new_hand,
+      hand: Cards.sort_cards(new_hand),
       team_id: player.team_id
     })
     |> Repo.update()
@@ -108,7 +108,7 @@ defmodule FishPhx.Players do
 
     Player.changeset(player, %{
       name: player.name,
-      hand: new_hand,
+      hand: Cards.sort_cards(new_hand),
       team_id: player.team_id
     })
     |> Repo.update()
