@@ -12,6 +12,8 @@ interface MakeClaimState {
   teammate1Cards: string[];
   teammate2Cards: string[];
   teammate3Cards: string[];
+
+  selectedHalfsuit?: number;
 }
 class MakeClaim extends React.Component<MakeClaimProps, MakeClaimState> {
   constructor(props: MakeClaimProps) {
@@ -22,12 +24,39 @@ class MakeClaim extends React.Component<MakeClaimProps, MakeClaimState> {
     this.makeClaim = this.makeClaim.bind(this);
   }
 
+  claimNameIDMap = new Map<string, number>([
+    ["Low Hearts", 0],
+    ["High Hearts", 1],
+    ["Low Diamonds", 2],
+    ["High Diamonds", 3],
+    ["Low Spades", 4],
+    ["High Spades", 5],
+    ["Low Clubs", 6],
+    ["High Clubs", 7],
+    ["Eights and Jokers", 8],
+  ]);
+
+  generateHalfSuitOptions(): JSX.Element[] {
+    const options: JSX.Element[] = [];
+    this.claimNameIDMap.forEach((value, key) => {
+      options.push(<option value={value}>{key}</option>);
+    });
+    return options;
+  }
+
   render() {
     return (
       <div>
         <h1>
           Make Claim, enter cards for each teammate<br></br> separated by commas
         </h1>
+        <select
+          id="choose halfsuit"
+          onChange={this.setSelectedHalfSuitState.bind(this)}
+        >
+          <option value="choose halfsuit">Choose Halfsuit</option>
+          {this.generateHalfSuitOptions()}
+        </select>
         <form>
           <label htmlFor="name1">
             {this.props.teammates[0] ? this.props.teammates[0].name : ""}
@@ -67,6 +96,10 @@ class MakeClaim extends React.Component<MakeClaimProps, MakeClaimState> {
     );
   }
 
+  // sets the state for the selected halfsuit
+  setSelectedHalfSuitState(event: React.ChangeEvent<HTMLSelectElement>) {
+    this.setState({ selectedHalfsuit: Number(event.target.value) });
+  }
   // sets a state for the cards claimed to be had by teammate 1
   setTeammate1ClaimState(event: React.ChangeEvent<HTMLInputElement>) {
     let listOfCards = event.target.value.toUpperCase().split(/,[\s]*/);

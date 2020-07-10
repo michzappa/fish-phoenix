@@ -29,7 +29,7 @@ export default class JoinGame extends React.Component<
     this.joinRoomClick = this.joinRoomClick.bind(this);
   }
 
-  generateRoomOptions() {
+  generateRoomOptions(): JSX.Element[] {
     return this.props.roomNames.map((name) => {
       return <option value={name}>{name}</option>;
     });

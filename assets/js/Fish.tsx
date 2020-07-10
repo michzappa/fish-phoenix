@@ -4,7 +4,6 @@ import axios from "./axios";
 import { Room, Team, Player } from "./data";
 import Logo from "./components/Logo";
 import JoinGame from "./components/JoinGame";
-import RoomList from "./components/RoomList";
 import PlayerPanel from "./components/PlayerPanel";
 import ShowHand from "./components/ShowHand";
 import ShowLastMove from "./components/ShowLastMove";
