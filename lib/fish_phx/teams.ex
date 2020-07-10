@@ -7,10 +7,12 @@ defmodule FishPhx.Teams do
   alias FishPhx.Rooms
   alias FishPhx.Cards
 
+  # sends all the team changesets
   def list_teams do
     Repo.all(Team)
   end
 
+  # sends a team changeset specified by the given id
   def get_team!(id) do
     Repo.get!(Team, id)
   end
