@@ -10,6 +10,7 @@ Endpoints:
 - DELETE /rooms/:name - deletes room with given name, deletes teams and players in room as well.
 - GET /teams - all teams as a list
 - GET /teams/:id - team with given id
+- GET /teams/:id/players - list of all players on the specified team
 - PUT /teams/:id - updates the claims of the specified team, body is {player_id: [array of cards as strings], ...} for each player on the team
 - GET /players - all players as a list
 - GET /players/:id/can_ask_for - gives a list of all the cards the specified player can ask for given their hand
